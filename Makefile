@@ -5,6 +5,9 @@
 
 # ### CONFIGURATION
 
+# The directory containing the source files
+SRC_DIR := src
+
 # make's internal directory to store stamps.
 # Stamps are used to keep track of operations, that do not produce a single
 # file.
@@ -14,7 +17,11 @@ MAKE_STAMP_DIR := .make-stamps
 # ### INTERNAL
 
 # Define some required stamps
-STAMP_NODE_INSTALL = $(MAKE_STAMP_DIR)/node-install
+STAMP_NODE_INSTALL := $(MAKE_STAMP_DIR)/node-install
+STAMP_TS_COMPILED := $(MAKE_STAMP_DIR)/ts-compiled
+
+# Create a list of source files
+SRC_FILES := $(shell find $(SRC_DIR) -type f -not -name *.spec.ts)
 
 # Utility function to create required directories on the fly
 create_dir = @mkdir -p $(@D)
@@ -25,6 +32,14 @@ create_dir = @mkdir -p $(@D)
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
+
+# Build the project
+build : compile
+.PHONY : build
+
+# Compile source *.ts files to *.js
+compile : $(STAMP_TS_COMPILED)
+.PHONY : compile
 
 # Run prettier against all files in the current directory.
 lint/prettier : | $(STAMP_NODE_INSTALL)
@@ -38,4 +53,9 @@ lint/prettier : | $(STAMP_NODE_INSTALL)
 $(STAMP_NODE_INSTALL) : package.json
 	$(create_dir)
 	npm install
-	@touch $@
+	touch $@
+
+$(STAMP_TS_COMPILED) : $(SRC_FILES) | $(STAMP_NODE_INSTALL)
+	$(create_dir)
+	npx tsc
+	touch $@
