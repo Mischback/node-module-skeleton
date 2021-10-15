@@ -4,3 +4,7 @@
 
 # don't track NodeJS module directory
 node_modules
+
+# ignore the package-lock.json while setting up the module layout
+# TODO: Make sure to remove this line before merging back to "development"
+package-lock.json
