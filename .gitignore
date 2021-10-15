@@ -2,6 +2,10 @@
 #
 # This does not rely on a given template, but will be completed "as we go".
 
+# don't track the internal stamp directory of make
+# (see Makefile -> MAKE_STAMP_DIR)
+.make-stamps
+
 # don't track NodeJS module directory
 node_modules
 
