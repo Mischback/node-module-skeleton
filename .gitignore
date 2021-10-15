@@ -1,0 +1,6 @@
+# .gitignore for a TypeScript-based NodeJS module
+#
+# This does not rely on a given template, but will be completed "as we go".
+
+# don't track NodeJS module directory
+node_modules
