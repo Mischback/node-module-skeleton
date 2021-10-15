@@ -41,6 +41,10 @@ build : compile
 compile : $(STAMP_TS_COMPILED)
 .PHONY : compile
 
+# Run eslint against all files in the current directory.
+lint/eslint : | $(STAMP_NODE_INSTALL)
+	npx eslint --fix "**/*.ts"
+
 # Run prettier against all files in the current directory.
 lint/prettier : | $(STAMP_NODE_INSTALL)
 	npx prettier . --ignore-unknown --write
