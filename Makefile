@@ -42,6 +42,11 @@ build : compile
 compile : $(STAMP_TS_COMPILED)
 .PHONY : compile
 
+# Run the test suite and report coverage information.
+coverage : | $(STAMP_NODE_INSTALL)
+	npx jest --config .jestrc.json --coverage
+.PHONY : coverage
+
 # Run eslint against all files in the current directory.
 lint/eslint : | $(STAMP_NODE_INSTALL)
 	npx eslint --fix "**/*.ts"
@@ -54,6 +59,11 @@ lint/prettier : | $(STAMP_NODE_INSTALL)
 # Apply/update the git hooks
 util/githooks : $(STAMP_GIT_HOOKS)
 .PHONY : util/githooks
+
+# Run the test suite.
+test : | $(STAMP_NODE_INSTALL)
+	npx jest --config .jestrc.json --verbose
+.PHONY : test
 
 # Provide a pre-configured tree command for convenience
 tree :
