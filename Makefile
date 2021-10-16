@@ -55,13 +55,17 @@ lint/prettier : | $(STAMP_NODE_INSTALL)
 util/githooks : $(STAMP_GIT_HOOKS)
 .PHONY : util/githooks
 
+# Provide a pre-configured tree command for convenience
+tree :
+	tree -a -I ".make-stamps|.git|node_modules" --dirsfirst -c
+.PHONY : tree
+
 
 # Actually execute simple-git-hooks' cli script to apply the configured hooks
 $(STAMP_GIT_HOOKS) : .simple-git-hooks.json | $(STAMP_NODE_INSTALL)
 	$(create_dir)
 	npx simple-git-hooks
 	touch $@
-
 
 # Install all required NodeJS packages as specified in package.json.
 # This is applied as an "order-only" prerequisite to all recipes, that rely on
