@@ -17,6 +17,7 @@ MAKE_STAMP_DIR := .make-stamps
 # ### INTERNAL
 
 # Define some required stamps
+STAMP_GIT_HOOKS := $(MAKE_STAMP_DIR)/git-hooks
 STAMP_NODE_INSTALL := $(MAKE_STAMP_DIR)/node-install
 STAMP_TS_COMPILED := $(MAKE_STAMP_DIR)/ts-compiled
 
@@ -49,6 +50,17 @@ lint/eslint : | $(STAMP_NODE_INSTALL)
 lint/prettier : | $(STAMP_NODE_INSTALL)
 	npx prettier . --ignore-unknown --write
 .PHONY : lint/prettier
+
+# Apply/update the git hooks
+util/githooks : $(STAMP_GIT_HOOKS)
+.PHONY : util/githooks
+
+
+# Actually execute simple-git-hooks' cli script to apply the configured hooks
+$(STAMP_GIT_HOOKS) : .simple-git-hooks.json | $(STAMP_NODE_INSTALL)
+	$(create_dir)
+	npx simple-git-hooks
+	touch $@
 
 
 # Install all required NodeJS packages as specified in package.json.
