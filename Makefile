@@ -33,23 +33,38 @@ create_dir = @mkdir -p $(@D)
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
-
-# Build the project
-build : compile
+# Just a shortcut to compile the sources for development
+build : dev/build
 .PHONY : build
 
-ci/coverage : | $(STAMP_NODE_INSTALL)
-	npx jest --config .jestrc.ci.json --coverage
+# Run the test suite and collect coverage information.
+# See .jestrc.ci.json! This Jest configuration is used exclusively in a CI
+# environment.
+# Please note that this recipe does not define any prerequisites. The project's
+# CI configuration must take care of any prerequisites, i.e. by installing all
+# required packages.
+# As of now, you may refer to .github/workflows/node_ci.yml
+ci/coverage :
+	npx jest --config .jestrc.ci.json
 .PHONY : ci/coverage
 
+# Build the project
+dev/build : dev/compile
+.PHONY : dev/build
+
 # Compile source *.ts files to *.js
-compile : $(STAMP_TS_COMPILED)
-.PHONY : compile
+dev/compile : $(STAMP_TS_COMPILED)
+.PHONY : dev/compile
 
 # Run the test suite and report coverage information.
-coverage : | $(STAMP_NODE_INSTALL)
+dev/coverage : | $(STAMP_NODE_INSTALL)
 	npx jest --config .jestrc.json --coverage
-.PHONY : coverage
+.PHONY : dev/coverage
+
+# Run the test suite.
+dev/test : | $(STAMP_NODE_INSTALL)
+	npx jest --config .jestrc.json --verbose
+.PHONY : dev/test
 
 # Run eslint against all files in the current directory.
 lint/eslint : | $(STAMP_NODE_INSTALL)
@@ -63,11 +78,6 @@ lint/prettier : | $(STAMP_NODE_INSTALL)
 # Apply/update the git hooks
 util/githooks : $(STAMP_GIT_HOOKS)
 .PHONY : util/githooks
-
-# Run the test suite.
-test : | $(STAMP_NODE_INSTALL)
-	npx jest --config .jestrc.json --verbose
-.PHONY : test
 
 # Provide a pre-configured tree command for convenience
 tree :

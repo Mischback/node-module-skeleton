@@ -6,8 +6,8 @@
 
   "clearMocks": true,
 
+  "collectCoverage": true,
   "collectCoverageFrom": ["<rootDir>/**/*.ts"],
-
   "coverageReporters": ["text", "lcov"],
   "coverageDirectory": ".coverage",
 
