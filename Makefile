@@ -38,6 +38,10 @@ MAKEFLAGS += --no-builtin-rules
 build : compile
 .PHONY : build
 
+ci/coverage : | $(STAMP_NODE_INSTALL)
+	npx jest --config .jestrc.ci.json --coverage
+.PHONY : ci/coverage
+
 # Compile source *.ts files to *.js
 compile : $(STAMP_TS_COMPILED)
 .PHONY : compile
