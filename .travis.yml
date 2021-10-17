@@ -1,8 +1,0 @@
-language: node_js
-node_js:
-  - node
-  - lts/*
-  - 16
-  - 15
-  - 14
-script: make test
