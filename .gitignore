@@ -8,3 +8,5 @@
 
 # don't track NodeJS module directory
 node_modules
+
+**/.coverage

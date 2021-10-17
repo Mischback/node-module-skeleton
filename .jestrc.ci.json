@@ -9,6 +9,7 @@
   "collectCoverageFrom": ["<rootDir>/**/*.ts"],
 
   "coverageReporters": ["text", "lcov"],
+  "coverageDirectory": ".coverage",
 
   "injectGlobals": false,
 
