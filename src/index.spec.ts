@@ -6,7 +6,7 @@ describe("This is just a generic example...", () => {
     expect(1).toBe(2);
   });
 
-  it("...to verify that tests can pass", () => {
+  it.only("...to verify that tests can pass", () => {
     expect(1).toBe(1);
   });
 });
