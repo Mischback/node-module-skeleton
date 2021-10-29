@@ -17,4 +17,3 @@ trim_trailing_whitespace = true # no trailing whitespaces
 # Makefiles always use tabs for indentation
 [Makefile]
 indent_style = tab
-
