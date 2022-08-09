@@ -5,7 +5,11 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 0
+    commit-message:
+      prefix: "[GH Actions]"
+    open-pull-requests-limit: 5
+    # reviewers:
+    #   - [GITHUB_USER_NAME]
 
   # Maintain dependencies for npm
   - package-ecosystem: "npm"
@@ -13,8 +17,11 @@ updates:
     schedule:
       interval: "daily"
     commit-message:
-      prefix: "npm"
-      prefix-development: "npm dev"
-    open-pull-requests-limit: 0
+      prefix: "[npm]"
+      prefix-development: "[npm dev]"
+    open-pull-requests-limit: 10
+    # reviewers:
+    #  - [GITHUB_USER_NAME]
     pull-request-branch-name:
       separator: "-"
+
