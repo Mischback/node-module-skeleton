@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "@types/jest": "^27.0.2",
-    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "clean-publish": "^4.0.1",
     "eslint": "^8.23.0",
