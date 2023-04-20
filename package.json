@@ -7,7 +7,7 @@
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.6.0",
     "jest": "^27.2.5",
-    "lint-staged": "^13.1.2",
+    "lint-staged": "^13.2.1",
     "prettier": "^2.8.7",
     "simple-git-hooks": "^2.8.1",
     "ts-jest": "^27.0.7",
